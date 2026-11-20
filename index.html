@@ -3612,7 +3612,7 @@
         `;
         const lbl = bar.querySelector('[data-zoom="label"]');
         const updateLabel = () => {
-          lbl.textContent = `${Math.round(inst.zoom * 100)}%`;
+          lbl.textContent = `${Math.round(inst.zoom * 50)}%`;
         };
         bar.addEventListener('click', (ev) => {
           ev.stopPropagation();
@@ -3622,7 +3622,7 @@
           if (act === 'in') inst.zoom = clamp(inst.zoom + 0.15, 0.5, 2.2);
           if (act === 'out') inst.zoom = clamp(inst.zoom - 0.15, 0.5, 2.2);
           if (act === 'reset') {
-            inst.zoom = 1.0;
+            inst.zoom = 0.5;
             inst.pan = { x: 0, y: 0 };
           }
           updateLabel();
