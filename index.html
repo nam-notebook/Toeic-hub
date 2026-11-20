@@ -2442,7 +2442,7 @@
         ctx.fillRect(pos.x - 16 * s, pos.y - 21 * s, 32 * s, 3.2 * s);
         ctx.fillStyle = '#1e293b';
         ctx.fillRect(pos.x - 19 * s, pos.y - 29 * s, 38 * s, 4.2 * s);
-      } } else if (pr.type === 'red_arch_bridge' || pr.type === 'canal_arch_bridge' || pr.type === 'stone_arch_bridge') {
+      } else if (pr.type === 'red_arch_bridge' || pr.type === 'canal_arch_bridge' || pr.type === 'stone_arch_bridge') {
         const isCanal = pr.type === 'canal_arch_bridge';
         const col = pr.type === 'red_arch_bridge' ? '#dc2626' : isCanal ? '#92400e' : '#94a3b8';
         const deckCol = isCanal ? '#b45309' : col;
