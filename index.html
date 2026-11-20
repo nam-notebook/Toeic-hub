@@ -892,7 +892,7 @@
         });
         addProp(-0.75, -2.25, 0, 'wooden_bench', 0.82, 2);
 
-        addProp(0.0, 0.38, 0.08, 'canal_arch_bridge', 1.00, 3);
+        addProp(0.0, 0.40, 0.02, 'canal_arch_bridge', 1.05, 3);
         addProp(0.85, 2.55, 0, 'flower_patch', 0.86, 3);
         if (s >= 3) creatures.push({ type: 'sampan_noodle', gx0: 0.0, gy0: 0.72, rx: 2.45, ry: 0.08, speed: 0.31, phase: 3.14, gz: 0.01 });
 
@@ -2442,17 +2442,45 @@
         ctx.fillRect(pos.x - 16 * s, pos.y - 21 * s, 32 * s, 3.2 * s);
         ctx.fillStyle = '#1e293b';
         ctx.fillRect(pos.x - 19 * s, pos.y - 29 * s, 38 * s, 4.2 * s);
-      } else if (pr.type === 'red_arch_bridge' || pr.type === 'canal_arch_bridge' || pr.type === 'stone_arch_bridge') {
-        const col = pr.type === 'red_arch_bridge' ? '#dc2626' : pr.type === 'canal_arch_bridge' ? '#b45309' : '#94a3b8';
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 6 * s;
+      } } else if (pr.type === 'red_arch_bridge' || pr.type === 'canal_arch_bridge' || pr.type === 'stone_arch_bridge') {
+        const isCanal = pr.type === 'canal_arch_bridge';
+        const col = pr.type === 'red_arch_bridge' ? '#dc2626' : isCanal ? '#92400e' : '#94a3b8';
+        const deckCol = isCanal ? '#b45309' : col;
+        const railCol = isCanal ? '#fef3c7' : 'rgba(255,255,255,0.55)';
+
+        if (isCanal) {
+          [-22 * s, 22 * s].forEach((ox) => {
+            ctx.fillStyle = '#5c280b';
+            ctx.fillRect(pos.x + ox - 3.2 * s, pos.y - 2 * s, 6.4 * s, 11 * s);
+            ctx.fillStyle = 'rgba(15, 118, 110, 0.45)';
+            ctx.beginPath();
+            ctx.ellipse(pos.x + ox, pos.y + 8 * s, 5.5 * s, 2.2 * s, 0, 0, Math.PI * 2);
+            ctx.fill();
+          });
+        }
+
+        ctx.strokeStyle = 'rgba(6, 78, 59, 0.35)';
+        ctx.lineWidth = 7 * s;
         ctx.beginPath();
-        ctx.arc(pos.x, pos.y + 5 * s, 21 * s, Math.PI * 1.12, Math.PI * 1.88);
+        ctx.arc(pos.x, pos.y + 8 * s, 24 * s, Math.PI * 1.14, Math.PI * 1.86);
         ctx.stroke();
-        ctx.strokeStyle = 'rgba(255,255,255,0.45)';
+
+        ctx.strokeStyle = col;
+        ctx.lineWidth = 7.5 * s;
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y + 5 * s, 24 * s, Math.PI * 1.14, Math.PI * 1.86);
+        ctx.stroke();
+
+        ctx.strokeStyle = deckCol;
+        ctx.lineWidth = 3.2 * s;
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y + 3.2 * s, 24 * s, Math.PI * 1.14, Math.PI * 1.86);
+        ctx.stroke();
+
+        ctx.strokeStyle = railCol;
         ctx.lineWidth = 1.4 * s;
         ctx.beginPath();
-        ctx.arc(pos.x, pos.y + 1 * s, 21 * s, Math.PI * 1.15, Math.PI * 1.85);
+        ctx.arc(pos.x, pos.y - 1.2 * s, 24 * s, Math.PI * 1.15, Math.PI * 1.85);
         ctx.stroke();
       } else if (pr.type === 'crystal_cluster') {
         const cols = ['#38bdf8', '#c084fc', '#fb923c'];
